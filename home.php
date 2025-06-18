@@ -45,7 +45,7 @@ if($usermail == true){
   <nav>
     <div class="logo">
       <img class="bluebirdlogo" src="./image/bluebirdlogo.png" alt="logo">
-      <p>BLUEBIRD</p>
+      <p>AZIFA HOMESTAY</p>
     </div>
     <ul>
       <li><a href="#firstsection">Home</a></li>
@@ -201,64 +201,35 @@ if($usermail == true){
     </div>
   </section>
     
-  <section id="secondsection"> 
-    <img src="./image/homeanimatebg.svg">
-    <div class="ourroom">
-      <h1 class="head">≼ Our room ≽</h1>
-      <div class="roomselect">
-        <div class="roombox">
-          <div class="hotelphoto h1"></div>
-          <div class="roomdata">
-            <h2>Superior Room</h2>
-            <div class="services">
-              <i class="fa-solid fa-wifi"></i>
-              <i class="fa-solid fa-burger"></i>
-              <i class="fa-solid fa-spa"></i>
-              <i class="fa-solid fa-dumbbell"></i>
-              <i class="fa-solid fa-person-swimming"></i>
+<section id="secondsection"> 
+  <img src="./image/homeanimatebg.svg">
+  <div class="ourroom">
+    <h1 class="head">≼ Our Homestay ≽</h1>
+    <div class="roomselect">
+      <?php
+      $sql = "SELECT * FROM homestay WHERE status = 'available'";
+      $result = mysqli_query($conn, $sql);
+      if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "
+          <div class='roombox'>
+            <div class='roomdata'>
+              <h2>" . htmlspecialchars($row['name']) . "</h2>
+              <p>Rooms: " . $row['total_rooms'] . "</p>
+              <p>Price: RM" . number_format($row['price'], 2) . "</p>
+              <p>Location: " . htmlspecialchars($row['location']) . "</p>
+              <button class='btn btn-primary bookbtn' onclick='openbookbox()'>Book</button>
             </div>
-            <button class="btn btn-primary bookbtn" onclick="openbookbox()">Book</button>
-          </div>
-        </div>
-        <div class="roombox">
-          <div class="hotelphoto h2"></div>
-          <div class="roomdata">
-            <h2>Delux Room</h2>
-            <div class="services">
-              <i class="fa-solid fa-wifi"></i>
-              <i class="fa-solid fa-burger"></i>
-              <i class="fa-solid fa-spa"></i>
-              <i class="fa-solid fa-dumbbell"></i>
-            </div>
-            <button class="btn btn-primary bookbtn" onclick="openbookbox()">Book</button>
-          </div>
-        </div>
-        <div class="roombox">
-          <div class="hotelphoto h3"></div>
-          <div class="roomdata">
-            <h2>Guest Room</h2>
-            <div class="services">
-              <i class="fa-solid fa-wifi"></i>
-              <i class="fa-solid fa-burger"></i>
-              <i class="fa-solid fa-spa"></i>
-            </div>
-            <button class="btn btn-primary bookbtn" onclick="openbookbox()">Book</button>
-          </div>
-        </div>
-        <div class="roombox">
-          <div class="hotelphoto h4"></div>
-          <div class="roomdata">
-            <h2>Single Room</h2>
-            <div class="services">
-              <i class="fa-solid fa-wifi"></i>
-              <i class="fa-solid fa-burger"></i>
-            </div>
-            <button class="btn btn-primary bookbtn" onclick="openbookbox()">Book</button>
-          </div>
-        </div>
-      </div>
+          </div>";
+        }
+      } else {
+        echo "<p>No homestays available at the moment.</p>";
+      }
+      ?>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <section id="thirdsection">
     <h1 class="head">≼ Facilities ≽</h1>

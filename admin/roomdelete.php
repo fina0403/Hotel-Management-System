@@ -1,13 +1,12 @@
 <?php
-
 include '../config.php';
 
-$id = $_GET['id'];
+// ✅ Validate ID safely
+$id = (int) $_GET['id'];
 
-$roomdeletesql = "DELETE FROM room WHERE id = $id";
+$homestayDeleteSql = "DELETE FROM homestay WHERE id = $id";
+$result = mysqli_query($conn, $homestayDeleteSql);
 
-$result = mysqli_query($conn, $roomdeletesql);
-
-header("Location:room.php");
-
+header("Location: room.php");
+exit();
 ?>
